@@ -4,10 +4,12 @@ import axios from "axios";
 import L from "leaflet";
 import { io } from "socket.io-client";
 
+const baseUrl = import.meta.env.VITE_API_URL;
+
+
 // const socket = io("http://localhost:5000"); // make sure this matches backend
 const socket = io(baseUrl); // make sure this matches backend
 
-const baseUrl = import.meta.env.VITE_API_URL;
 
 const MapPage = () => {
   const [disasters, setDisasters] = useState([]);

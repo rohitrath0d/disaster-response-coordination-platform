@@ -164,11 +164,12 @@ import { io } from "socket.io-client";
 import DisasterForm from "./DisasterForm";
 // import { Dialog, DialogContent } from "./ui/dialog";
 
+const baseUrl = import.meta.env.VITE_API_URL;
+
 // const socket = io("http://localhost:5000");
 
 const socket = io(baseUrl); // make sure this matches backend
 
-const baseUrl = import.meta.env.VITE_API_URL;
 
 
 const DashboardPage = () => {
