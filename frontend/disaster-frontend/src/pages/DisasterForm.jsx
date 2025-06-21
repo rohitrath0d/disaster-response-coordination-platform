@@ -3,6 +3,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect } from "react";
 
+
+
+const baseUrl = import.meta.env.VITE_API_URL;
+
 const DisasterForm = ({ onSuccess, defaultValues = {}, isEdit = false }) => {
   const {
     register,
@@ -18,8 +22,10 @@ const DisasterForm = ({ onSuccess, defaultValues = {}, isEdit = false }) => {
   const onSubmit = async (data) => {
     try {
       const url = isEdit
-        ? `http://localhost:5000/api/disasters/${defaultValues.id}`
-        : `http://localhost:5000/api/disasters`;
+        // ? `http://localhost:5000/api/disasters/${defaultValues.id}`
+        ? `${baseUrl}/${defaultValues.id}`
+        // : `http://localhost:5000/api/disasters`;
+        : `${baseUrl}/api/disasters`;
 
       const method = isEdit ? "put" : "post";
 

@@ -4,15 +4,17 @@ import axios from "axios";
 import L from "leaflet";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // make sure this matches backend
+// const socket = io("http://localhost:5000"); // make sure this matches backend
+const socket = io(baseUrl); // make sure this matches backend
 
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const MapPage = () => {
   const [disasters, setDisasters] = useState([]);
 
   const fetchDisasters = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/disasters", {
+      const res = await axios.get(`${baseUrl}/api/disasters`, {
         headers: {
           Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // 🔐 Use your admin token here
         },
@@ -74,42 +76,42 @@ const MapPage = () => {
   };
 
   const handleBroadcast = async (id) => {
-  try {
-    const res = await axios.post(
-      `http://localhost:5000/api/disasters/${id}/broadcast`,
-      {},
-      {
-        headers: {
-          Authorization: "Bearer netrunnerX999",
-        },
-      }
-    );
-    alert(res.data.message);
-  } catch (err) {
-    console.error("Broadcast error:", err);
-    alert("Failed to broadcast.");
-  }
-};
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/disasters/${id}/broadcast`,
+        {},
+        {
+          headers: {
+            Authorization: "Bearer netrunnerX999",
+          },
+        }
+      );
+      alert(res.data.message);
+    } catch (err) {
+      console.error("Broadcast error:", err);
+      alert("Failed to broadcast.");
+    }
+  };
 
-const handleVerify = async (id) => {
-  try {
-    const res = await axios.post(
-      `http://localhost:5000/api/disasters/${id}/verify-image`,
-      {
-        image_url: "https://example.com/fake.jpg", // 🔄 optional/fake for mockup
-      },
-      {
-        headers: {
-          Authorization: "Bearer netrunnerX999",
+  const handleVerify = async (id) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/disasters/${id}/verify-image`,
+        {
+          image_url: "https://example.com/fake.jpg", // 🔄 optional/fake for mockup
         },
-      }
-    );
-    alert(`Verification: ${res.data.verification_status}`);
-  } catch (err) {
-    console.error("Verify error:", err);
-    alert("Verification failed.");
-  }
-};
+        {
+          headers: {
+            Authorization: "Bearer netrunnerX999",
+          },
+        }
+      );
+      alert(`Verification: ${res.data.verification_status}`);
+    } catch (err) {
+      console.error("Verify error:", err);
+      alert("Verification failed.");
+    }
+  };
 
 
 
