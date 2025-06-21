@@ -10,15 +10,14 @@ const router = express.Router();
 // app.use(express.json()); // ✅ This must come before routes
 
 
-
-
-
 // router.post('/', createDisaster); // POST /api/disasters
-router.post('/', requireAuth, createDisaster);
+// router.post('/', requireAuth, createDisaster);
+router.post('/', createDisaster);
 router.post('/extract-location', extractLocationFromDescription);
 
 // router.get('/', getDisasters); // GET /api/disasters
-router.get('/', requireAuth, getDisasters);
+// router.get('/', requireAuth, getDisasters);
+router.get('/', getDisasters);
 router.get('/nearby', getNearbyDisasters); // GET /api/disasters/nearby
 
 

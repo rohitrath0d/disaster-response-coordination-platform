@@ -5,6 +5,7 @@ import L from "leaflet";
 import { io } from "socket.io-client";
 
 const baseUrl = import.meta.env.VITE_API_URL;
+const token = import.meta.env.VITE_ADMIN_TOKEN
 
 
 // const socket = io("http://localhost:5000"); // make sure this matches backend
@@ -18,7 +19,8 @@ const MapPage = () => {
     try {
       const res = await axios.get(`${baseUrl}/api/disasters`, {
         headers: {
-          Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // 🔐 Use your admin token here
+          // Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // 🔐 Use your admin token here
+          Authorization: `Bearer ${token}`, // 🔐 Use your admin token here
         },
       });
       setDisasters(res.data.data);

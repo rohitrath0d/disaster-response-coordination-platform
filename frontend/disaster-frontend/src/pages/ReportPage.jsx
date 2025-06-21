@@ -27,6 +27,8 @@ const ReportPage = () => {
   //     });
   //   }
   // };
+  const baseUrl = import.meta.env.VITE_API_URL;
+  const token = import.meta.env.VITE_ADMIN_TOKEN
 
   const onSubmit = async (data) => {
     try {
@@ -39,11 +41,13 @@ const ReportPage = () => {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/disasters",
+        // "http://localhost:5000/api/disasters",
+        `${baseUrl}/api/disasters`,
         formattedData,
         {
           headers: {
-            Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // replace with your real token
+            // Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // replace with your real token
+            Authorization: `Bearer ${token}`, // replace with your real token
           }
         }
       );
@@ -105,8 +109,9 @@ const ReportPage = () => {
 
       {response && (
         <div
-          className={`mt-4 p-3 rounded ${response.success ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
-            }`}
+          className={`mt- 4 p- 3 rounded ${
+        response.success ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+      }`}
         >
           {response.message}
         </div>

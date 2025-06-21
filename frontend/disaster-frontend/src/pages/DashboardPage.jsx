@@ -19,7 +19,7 @@
 
 //   const fetchDisasters = async () => {
 //     try {
-      
+
 //       const res = await axios.get("http://localhost:5000/api/disasters", {
 //         headers: {
 //           Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // Replace with your actual ADMIN_TOKEN
@@ -67,7 +67,7 @@
 //   };
 
 
-  
+
 //   const formatDate = (iso) => new Date(iso).toLocaleString();
 
 //   return (
@@ -162,15 +162,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import DisasterForm from "./DisasterForm";
-// import { Dialog, DialogContent } from "./ui/dialog";
+import { Dialog, DialogContent } from "../../components/ui/dialog";
 
 const baseUrl = import.meta.env.VITE_API_URL;
+const token = import.meta.env.VITE_ADMIN_TOKEN
 
 // const socket = io("http://localhost:5000");
 
 const socket = io(baseUrl); // make sure this matches backend
-
-
 
 const DashboardPage = () => {
   const [disasters, setDisasters] = useState([]);
@@ -182,12 +181,16 @@ const DashboardPage = () => {
   const [editTarget, setEditTarget] = useState(null);
 
   const fetchDisasters = async () => {
+    // setLoading(true);
     try {
       const res = await axios.get(`${baseUrl}/api/disasters`, {
         headers: {
-          Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2",
+          // Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2",
+          Authorization: `Bearer ${token}`,
         },
       });
+      // const res = await axios.get(`${baseUrl}/api/disasters`);
+
       const sorted = res.data.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
       setDisasters(sorted);
       setFiltered(sorted);
@@ -198,15 +201,16 @@ const DashboardPage = () => {
   };
 
   useEffect(() => {
-    fetchDisasters();
-    socket.on("disaster_updated", () => {
-      console.log("🛰️ Real-time update received");
-      fetchDisasters();
-    });
+    fetchDisasters(); // Initial fetch
+    socket.on("disaster_updated", (payload) => {
+      console.log("🛰️ Real-time update received", payload);
+      fetchDisasters(); // Refresh list on updates
+    }); 
 
     return () => {
       socket.off("disaster_updated");
     };
+
   }, []);
 
   const handleFilter = () => {
@@ -274,20 +278,20 @@ const DashboardPage = () => {
       </div>
 
       {showModal && (
-        // <Dialog open={showModal} onOpenChange={setShowModal}>
-        <div open={showModal} onOpenChange={setShowModal}>
+        <Dialog open={showModal} onOpenChange={setShowModal}>
+        {/* // <div open={showModal} onOpenChange={setShowModal}> */}
           {/* <DialogContent> */}
-            <DisasterForm
-              defaultValues={editTarget || {}}
-              isEdit={!!editTarget}
-              onSuccess={() => {
-                fetchDisasters();
-                setShowModal(false);
-                setEditTarget(null);
-              }}
-            />
-          </div>
-        // </Dialog>
+          <DisasterForm
+            defaultValues={editTarget || {}}
+            isEdit={!!editTarget}
+            onSuccess={() => {
+              fetchDisasters();
+              setShowModal(false);
+              setEditTarget(null);
+            }}
+          />
+        {/* </div> */}
+        </Dialog>
       )}
 
       {loading ? (
