@@ -59,10 +59,11 @@ router.get('/:id/official-updates', getOfficialUpdates);
 
 
 // update disaster
-router.put('/:id', requireAuth, updateDisaster);
+// router.put('/:id', requireAuth, updateDisaster);
+router.put('/:id', updateDisaster);
 
 // delete disaster
-router.delete('/:id', requireAuth, deleteDisaster);
+router.delete('/:id', deleteDisaster);
 
 
 
