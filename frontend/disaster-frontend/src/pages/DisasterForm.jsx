@@ -1,14 +1,11 @@
-/* eslint-disable no-unused-vars */
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 
 const baseUrl = import.meta.env.VITE_API_URL;
-const token = import.meta.env.VITE_ADMIN.TOKEN;
-const socket = io(baseUrl); // Socket connected to backend
+const token = import.meta.env.VITE_ADMIN_TOKEN;
 
 
 const DisasterForm = ({ initialData, onClose }) => {
