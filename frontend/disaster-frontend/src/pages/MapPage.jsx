@@ -20,7 +20,7 @@ const MapPage = () => {
       const res = await axios.get(`${baseUrl}/api/disasters`, {
         headers: {
           // Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // 🔐 Use your admin token here
-          "Authorization": `Bearer ${token}`, // 🔐 Use your admin token here
+          Authorization: `Bearer ${token}`, // 🔐 Use your admin token here
         },
       });
       setDisasters(res.data.data);
@@ -88,7 +88,7 @@ const MapPage = () => {
         {
           headers: {
             // "Authorization": "Bearer netrunnerX999",
-            "Authorization": "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2",
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -109,8 +109,7 @@ const MapPage = () => {
         },
         {
           headers: {
-            // Authorization: "Bearer netrunnerX999",
-            Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2",
+            Authorization: `Bearer${token}`,
           },
         }
       );

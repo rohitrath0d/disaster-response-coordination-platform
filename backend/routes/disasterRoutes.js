@@ -30,7 +30,6 @@ router.get('/:id/audit', getDisasterAudit);
 // broadcast routes.
 router.post('/:id/broadcast', requireAuth, broadcastDisaster);
 
-
 // Route to List Broadcasted Disasters
 router.get('/broadcasted', getBroadcastedDisasters);
 

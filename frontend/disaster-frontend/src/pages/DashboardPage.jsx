@@ -643,8 +643,7 @@ const DashboardPage = () => {
     try {
       await axios.delete(`${baseUrl}/api/disasters/${id}`, {
         headers: {
-          // Authorization: `Bearer ${token}`,
-          "Authorization": `Bearer ${token}`,       // IMPORTANT: THIS IS THE MAIN ERROR.... THIS AUTHORIZATION -> SHOULD BE IN DOUBLE QUOTES -> "Authorization"  
+          Authorization: `Bearer ${token}`,
         },
       });
       alert("Deleted successfully.");

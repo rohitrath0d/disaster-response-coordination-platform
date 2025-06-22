@@ -47,7 +47,7 @@ const ReportPage = () => {
         {
           headers: {
             // Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // replace with your real token
-            "Authorization": `Bearer ${token}`, // replace with your real token
+            Authorization: `Bearer ${token}`, // replace with your real token
           }
         }
       );
