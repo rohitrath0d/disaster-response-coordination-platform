@@ -20,7 +20,7 @@ const MapPage = () => {
       const res = await axios.get(`${baseUrl}/api/disasters`, {
         headers: {
           // Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2", // 🔐 Use your admin token here
-          Authorization: `Bearer ${token}`, // 🔐 Use your admin token here
+          "Authorization": `Bearer ${token}`, // 🔐 Use your admin token here
         },
       });
       setDisasters(res.data.data);
@@ -82,11 +82,13 @@ const MapPage = () => {
   const handleBroadcast = async (id) => {
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/disasters/${id}/broadcast`,
-        {},
+        // `http://localhost:5000/api/disasters/${id}/broadcast`,
+        `${baseUrl}/api/disasters/${id}/broadcast`,
+        // {},
         {
           headers: {
-            Authorization: "Bearer netrunnerX999",
+            // "Authorization": "Bearer netrunnerX999",
+            "Authorization": "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2",
           },
         }
       );
@@ -100,13 +102,15 @@ const MapPage = () => {
   const handleVerify = async (id) => {
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/disasters/${id}/verify-image`,
+        // `http://localhost:5000/api/disasters/${id}/verify-image`,
+        `${baseUrl}/api/disasters/${id}/verify-image`,
         {
           image_url: "https://example.com/fake.jpg", // 🔄 optional/fake for mockup
         },
         {
           headers: {
-            Authorization: "Bearer netrunnerX999",
+            // Authorization: "Bearer netrunnerX999",
+            Authorization: "Bearer 9870afe4e87f6640373778c7e2fef30bab86ea4a195bde0f14a511bb52f0e3b2",
           },
         }
       );

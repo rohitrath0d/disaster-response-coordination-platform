@@ -76,12 +76,12 @@ const DisasterForm = ({ initialData, onClose }) => {
     try {
       if (isEdit) {
         await axios.put(`${baseUrl}/api/disasters/${initialData.id}`, payload, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { "Authorization": `Bearer ${token}` },
         });
         alert("Disaster updated");
       } else {
         await axios.post(`${baseUrl}/api/disasters`, payload, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { "Authorization": `Bearer ${token}` },
         });
         alert("Disaster created");
       }
