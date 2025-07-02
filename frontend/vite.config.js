@@ -1,26 +1,27 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from "@tailwindcss/vite";
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+     nodePolyfills({
+      include: ['crypto', 'stream']
+    })
   ],
   base: "./",
   build: {
     outDir: "dist",
     chunkSizeWarningLimit: 1600,
-     rollupOptions: {
+    rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           leaflet: ['leaflet', 'react-leaflet'],
           supabase: ['@supabase/supabase-js'],
-          maps: ['leaflet', 'react-leaflet'],
-          forms: ['react-hook-form', '@hookform/resolvers'],
-          auth: ['@supabase/supabase-js', 'jose', 'jwt-decode']
         }
       }
     }
@@ -38,5 +39,6 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
-  }
+  },
+
 })
