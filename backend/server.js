@@ -1,9 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
 import disasterRoutes from './routes/disasterRoutes.js';
+import blueskyRoutes from './routes/blueskyRoutes.js';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
+import officialUpdateRoutes from './routes/officialUpdateRoutes.js' 
+
 
 dotenv.config();
 const app = express();
@@ -13,11 +17,15 @@ const server = http.createServer(app);
 //   cors: { origin: '*' }
 // });
 
+app.use(express.json());    // this must come before CORS/ routes setup... VERY IMPORTANT!
+
+
 // ✅ Define allowed origins
 const allowedOrigins = [
   "http://localhost:5173",
   "https://disaster-response-coordination-plat-bay.vercel.app",
 ];
+
 
 // ✅ Setup CORS for Express
 app.use(cors({
@@ -31,8 +39,8 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
 
 const io = new Server(server, {
@@ -41,7 +49,7 @@ const io = new Server(server, {
     // "https://disaster-response-coordination-plat-bay.vercel.app" // ✅ for Vercel
     // ],
     origin: allowedOrigins,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   },
 });
@@ -63,10 +71,14 @@ io.on('connection', (socket) => {
 // app.use(express.json());
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/disasters', disasterRoutes);
+app.use('/api/bluesky', blueskyRoutes);
+app.use('/api/officialupdate', officialUpdateRoutes);
+
+
 
 const PORT = process.env.PORT || 5000;
-
 
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`);
