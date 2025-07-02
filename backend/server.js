@@ -23,6 +23,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   // "http://localhost:5173",
   "https://disaster-response-coordination-plat-bay.vercel.app",
+  "https://disaster-response-coordination-plat-pi.vercel.app"
 ];
 
 app.use(express.json());    // this must come before CORS/ routes setup... VERY IMPORTANT!
