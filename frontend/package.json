@@ -25,7 +25,9 @@
     "axios": "^1.10.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "crypto-browserify": "^3.12.1",
     "date-fns": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^4.2.0",
     "lucide-react": "^0.522.0",
@@ -38,8 +40,10 @@
     "react-router-dom": "^7.6.2",
     "socket.io-client": "^4.8.1",
     "sonner": "^2.0.5",
+    "stream-browserify": "^3.0.0",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss": "^4.1.10"
+    "tailwindcss": "^4.1.10",
+    "vite-plugin-node-polyfills": "^0.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
