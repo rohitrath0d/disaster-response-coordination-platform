@@ -65,7 +65,7 @@ function SideBar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/home");
+    navigate("/");
   };
 
   return (
