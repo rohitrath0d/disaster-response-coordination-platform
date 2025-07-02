@@ -17,7 +17,10 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           leaflet: ['leaflet', 'react-leaflet'],
-          supabase: ['@supabase/supabase-js']
+          supabase: ['@supabase/supabase-js'],
+          maps: ['leaflet', 'react-leaflet'],
+          forms: ['react-hook-form', '@hookform/resolvers'],
+          auth: ['@supabase/supabase-js', 'jose', 'jwt-decode']
         }
       }
     }
