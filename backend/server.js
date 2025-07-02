@@ -22,7 +22,7 @@ app.use(express.json());    // this must come before CORS/ routes setup... VERY 
 
 // ✅ Define allowed origins
 const allowedOrigins = [
-  "http://localhost:5173",
+  // "http://localhost:5173",
   "https://disaster-response-coordination-plat-bay.vercel.app",
 ];
 
