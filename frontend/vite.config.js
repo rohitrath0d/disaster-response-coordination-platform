@@ -10,7 +10,16 @@ export default defineConfig({
   ],
   base: "./",
   build: {
-    outDir: "dist"
+    outDir: "dist",
+     rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          leaflet: ['leaflet', 'react-leaflet'],
+          supabase: ['@supabase/supabase-js']
+        }
+      }
+    }
   },
   server: {
     proxy: {
