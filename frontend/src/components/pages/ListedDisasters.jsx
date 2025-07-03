@@ -340,7 +340,8 @@ const ListedDisasters = () => {
               )}
 
               {loading ? (
-                <p>Loading...</p>
+                // <p>Loading...</p>
+                <div className="bg-yellow-100 text-yellow-800 p-2 rounded mb-4 text-sm animate-pulse"> Server might be waking up... Please wait or refresh if stuck. </div>
               ) : disasters.length === 0 ? (
                 <p className="text-gray-500">No disasters found.</p>
               ) : (
